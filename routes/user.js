@@ -3,6 +3,7 @@ const { response } = require("../app");
 var router = express.Router();
 var productHelpers = require("../helpers/product-helpers");
 var userHelpers = require("../helpers/user-helpers");
+const { log } = require("handlebars/runtime");
 const verifyLogin = (req,res,next)=>{
   if(req.session.loggedIn){
     next()
@@ -87,6 +88,11 @@ userHelpers.changeProductQuantity(req.body)
     
 //   })
 // })
+
+router.get("/place-order",verifyLogin,async(req,res)=>{
+  let total =await userHelpers.getTotalAmount(req.session.user._id)
+  res.render('user/place-order')
+})
 
 
 module.exports = router;

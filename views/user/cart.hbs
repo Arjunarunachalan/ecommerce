@@ -21,12 +21,10 @@
           <td>Rs.{{this.product.price}}</td>
           
           <td>
-           {{!-- {{#if response.quantity==1}}
-           {{}}
-           {{else}} --}}
+         
           <button class="cart-item-count mr-4 " id="btn{{this.product._id}}" onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)">-</button>
 
-          {{!-- {{/if}} --}}
+        
 
          <span id='{{this.product._id}}'> {{this.quantity}}</span>
             <button class="cart-item-count ml-4" onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)">+</button></td>
@@ -37,6 +35,14 @@
         {{/each}}
       </tbody>
     </table>
+    <hr>
+    <div>
+    <h3 class="float-right" style="float: right; margin-right:134px; ">RS.10000</h3>
+
+    </div><br><br>
+    <div>
+    <a href="/place-order " class="btn btn-success float-right ml-4" style="float:right;margin-right:110px;width:150px;margin-top:10px">Place Order</a>
+   </div>
   </div>
 </section>
 <script>

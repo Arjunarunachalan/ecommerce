@@ -1,0 +1,48 @@
+<section>
+    <div class="container">
+        <form action="" method="post">
+            <div class="row">
+                <div class="col-md-6" class="left">
+                    <h2>Enter Delivery Details</h2>
+                    <div style="padding: 5px;">
+                        <label for="address">Address:</label>
+                        <input type="text" name="address" id="address"><br>
+
+                        <label for="pincode">PinCode:</label>
+                        <input type="text" name="pincode" id="pincode"><br>
+
+                        <label for="mobile">Mobile:</label>
+                        &nbsp;&nbsp;<input type="text" name="mobile" id="mobile">
+
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+                    <div class="container mt-5 ml-5 checkout" style="border: 1px solid rgb(73, 70, 70); border-radius:7px;padding:20px">
+                        <h4>Total Amount:Rs.2000</h4>
+                        <hr>
+                        <div class="payment" style="margin-left: 30px;">
+                            <p>payment Method</p>
+                            <label class="radio-inline">
+                                <input type="radio" name="payment-method" value="COD">&nbsp; Cashon Delivary
+                            </label>
+                            <br>
+                            <label class="radio-inline">
+                                <input type="radio" name="payment-method" value="Online">&nbsp; Online Payment
+                            </label><br>
+                            <button class="btn btn-primary float-right" style="margin-top:20px;width:150px" type="submit">Checkout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<style>
+    input{
+        margin: 5px;
+    }
+    
+</style>
