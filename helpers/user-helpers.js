@@ -48,7 +48,7 @@ module.exports = {
   addToCart: (proId, userId) => {
     let proObj = {
       item: objectId(proId),
-      quantity: 1
+      quantity: 1,
     };
     return new Promise(async (resolve, reject) => {
       let userCart = await db
@@ -60,10 +60,11 @@ module.exports = {
           (product) => product.item == proId
         );
         console.log(productExist);
-        if (productExist!= -1) {
+        if (productExist != -1) {
           db.get()
             .collection(collection.CART_COLLECTION)
-            .updateOne({user:objectId(userId)},
+            .updateOne(
+              { user: objectId(userId) },
               { "products.item": objectId(proId) },
               {
                 $inc: { "products.$.quantity": 1 },
@@ -73,7 +74,8 @@ module.exports = {
               resolve();
             });
         } else {
-          db.get().collection(collection.CART_COLLECTION)
+          db.get()
+            .collection(collection.CART_COLLECTION)
             .updateOne(
               { user: objectId(userId) },
               {
@@ -108,31 +110,32 @@ module.exports = {
             $match: { user: objectId(userId) },
           },
           {
-            $unwind:'$products'
+            $unwind: "$products",
           },
           {
-            $project:{
-              item:'$products.item',
-              quantity:'$products.quantity'
-            }
+            $project: {
+              item: "$products.item",
+              quantity: "$products.quantity",
+            },
           },
           {
-            $lookup:{
-              from:collection.PRODUCT_COLLECTION,
-              localField:'item',
-              foreignField:'_id',
-              as:'product'
-            }
+            $lookup: {
+              from: collection.PRODUCT_COLLECTION,
+              localField: "item",
+              foreignField: "_id",
+              as: "product",
+            },
           },
           {
-            $project:{
-              item:1,quantity:1,product:{$arrayElemAt:['$product',0]}
-            }
-          }
-         
+            $project: {
+              item: 1,
+              quantity: 1,
+              product: { $arrayElemAt: ["$product", 0] },
+            },
+          },
         ])
         .toArray();
-      
+
       resolve(cartItems);
     });
   },
@@ -149,38 +152,56 @@ module.exports = {
       resolve(count);
     });
   },
-  changeProductQuantity:(details)=>{
-    count=parseInt(details.count)
-    return new Promise((resolve,reject)=>{
-     db.get()
-      .collection(collection.CART_COLLECTION)
-      .updateOne(
-        { _id:objectId(details.cart),"products.item": objectId(details.product) },
-        {
-          $inc: { "products.$.quantity":count },
-        }
-      )
-        
-      .then((response) => {
-     
-        
-        resolve(response);
-      });
+  changeProductQuantity: (details) => {
+    details.count = parseInt(details.count);
+    details.quantity = parseInt(details.quantity);
+    return new Promise((resolve, reject) => {
+      if (details.count == -1 && details.quantity == 1) {
+        db.get()
+          .collection(collection.CART_COLLECTION)
+          .updateOne(
+            { _id: objectId(details.cart) },
+            {
+              $pull: { products: { item: objectId(details.product) } },
+            }
+          )
+          .then((response) => {
+            resolve({ removeProduct: true });
+          });
+      } else {
+        db.get()
+          .collection(collection.CART_COLLECTION)
+          .updateOne(
+            {
+              _id: objectId(details.cart),'products.item':objectId(details.product)
+              
+            },
+            {
+              $inc: { "products.$.quantity":details.count },
+            }
+          )
 
-    })
+          .then((response) => {
+            resolve(true);
+          });
+      }
+    });
   },
 
-  removeProduct:({proId, cartId}) => {
-      return new Promise(async(resolve,reject)=>{
-        let userCart = await db.get().collection(collection.CART_COLLECTION)
-        .updateOne({_id: objectId(cartId)},{
-          $pull: { products: { item: objectId(proId)} },
-        })
-        console.log(userCart);
-        if(userCart){
-
-        }
-
-      });
-}
-}
+  removeProduct: ({ proId, cartId }) => {
+    return new Promise(async (resolve, reject) => {
+      let userCart = await db
+        .get()
+        .collection(collection.CART_COLLECTION)
+        .updateOne(
+          { _id: objectId(cartId) },
+          {
+            $pull: { products: { item: objectId(proId) } },
+          }
+        );
+      console.log(userCart);
+      if (userCart) {
+      }
+    });
+  },
+};

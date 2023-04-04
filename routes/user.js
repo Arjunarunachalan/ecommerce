@@ -74,19 +74,19 @@ router.get('/add-to-cart/:id',(req,res)=>{
 })
 
 router.post('/change-product-quantity',(req,res,next)=>{
-  console.log(req.body);
+
 userHelpers.changeProductQuantity(req.body)
 .then((response)=>{
-  console.log(response,"jhfgjhufyufvut");
-  res.json({isUpdated:true ,count: req.body.count,response})
+ 
+  res.json(response)
 })
 })
-router.post('/remove-product',(req,res)=>{
-  userHelpers.removeProduct(req.body).then((response)=>{
-  resolve(response)
+// router.post('/remove-product',(req,res)=>{
+//   userHelpers.removeProduct(req.body).then((response)=>{
+//   resolve(response)
     
-  })
-})
+//   })
+// })
 
 
 module.exports = router;
