@@ -1,0 +1,81 @@
+<section>
+  <div class="container">
+    <table class="table mt-5">
+      <thead>
+        <tr>
+          <th scope="col">Item</th>
+          <th scope="col">Title</th>
+          <th scope="col">Quatnity</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {{#each products }}
+        <tr>
+         
+          <td>
+            <img src="/product-images/{{this.product._id}}.jpg" alt="" style="width:70px;height:auto" />
+          </td>
+          <td>{{this.product.name}}</td>
+          
+          <td>
+           {{!-- {{#if response.quantity==1}}
+           {{}}
+           {{else}} --}}
+          <button class="cart-item-count mr-4 " id="btn{{this.product._id}}" onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)">-</button>
+
+          {{!-- {{/if}} --}}
+
+         <span id='{{this.product._id}}'> {{this.quantity}}</span>
+            <button class="cart-item-count ml-4" onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)">+</button></td>
+          <td>
+           <button type="button" class="btn btn-danger" onclick="removeProduct('{{this._id}}','{{this.product._id}}')">Remove</button>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</section>
+<script>
+
+  function changeQuantity(cartId,proId,count){
+    let quantity = document.getElementById(proId)
+     let quantityReducer = document.getElementById(`btn${proId}`)
+    $.ajax({
+      url:'/change-product-quantity',
+      data:{
+        cart:cartId,
+        product:proId,
+        count:count
+      },
+      method:'post',
+      success:(response)=>{
+        let newQuantity = parseInt(quantity.innerText)+parseInt(response.count)
+       quantity.innerText =newQuantity
+       if(newQuantity ==1){
+quantityReducer.disabled=true
+       }else{
+quantityReducer.disabled=false
+
+       }
+      }
+    })
+
+  }
+
+  function removeProduct(cartId,proId){
+    $.ajax({
+      url:'/remove-product',
+      data:{
+        cartId:cartId,
+        proId:proId,
+      },
+     method:'post',
+     success:((response)=>{
+      resolve(response)
+     })
+    
+  })
+  }
+</script>
