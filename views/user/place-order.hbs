@@ -1,6 +1,6 @@
 <section>
     <div class="container">
-        <form action="" method="post">
+        <form action="" method="post" id="checkout-form">
             <div class="row">
                 <div class="col-md-6" class="left">
                     <h2>Enter Delivery Details</h2>
@@ -13,6 +13,7 @@
 
                         <label for="mobile">Mobile:</label>
                         &nbsp;&nbsp;<input type="text" name="mobile" id="mobile">
+                        <input type="text" name="userId" id="" value="{{user._id}}" hidden>
 
 
                     </div>
@@ -40,6 +41,23 @@
         </form>
     </div>
 </section>
+<script>
+    $("#checkout-form").submit((e)=>{
+        e.preventDefault()
+        $.ajax({
+            url:'/place-order',
+            method:'post',
+            data:$('#checkout-form').serialize(),
+            success:(response)=>{
+                alert(response)
+                if(response.status){
+                    location.href=
+                }
+            }
+        })
+    })
+</script>
+
 <style>
     input{
         margin: 5px;
