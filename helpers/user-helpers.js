@@ -317,8 +317,10 @@ module.exports = {
         {
           $lookup:{
             from:collection.PRODUCT_COLLECTION,
-            localField:'_id',
+            localField:'item',
+            foreignField: "_id",
             as:'product'
+
           }
         },
         {
