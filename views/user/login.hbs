@@ -1,30 +1,23 @@
-<div class="container mt-5 pl-5 w-75 " >
-  <div class="row">
-    <div class="col-md-4   ">
-        <h3>Login Form</h3>
-        {{#if logErr}}
-        <p class="error">invalid username or password</p>
-        {{/if}}
-        <form action="/login" method="post" >
-            <div class="mt-1">
-            <label for="email address" ></label>
-            <input type="email" name="Email" placeholder="enter your email address"class="w-100">
-            </div>  
 
-            <div class="mt-1 ">
-            <label for="password" ></label>
-            <input type="password" name="Password" placeholder="enter your password" class="w-100">
-            </div>
-            <div>
-  
-            <a href="/sighnup">Create New Account ?</a>
-        <button type="submit" class="btn btn-success float-right" >Login</button>
-            </div>
-          
-
-        </form>
-        
+<div class="row">
+    <div class="col-md-6 m-auto">
+        <div class="container mt-5 pl-5">
+            <h2 class="text-center">Login</h2>
+            <form action="/login" method="post">
+            {{#if loginErr}}
+                <p class="error text-danger">{{loginErr}}</p>
+            {{/if}}
+                <div class="form-group">
+                    <label>Email address</label>
+                    <input type="email" class="form-control" name="Email" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" name="Password" placeholder="Password">
+                </div>
+                <a href="/sighnup">Create new account?</a>
+                <button type="submit" class="btn btn-primary float-right">Login</button>
+            </form>
+        </div>
     </div>
-  </div>
-
 </div>

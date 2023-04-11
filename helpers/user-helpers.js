@@ -186,23 +186,24 @@ module.exports = {
       }
     });
   },
+  removeProduct:(data)=>{
+return new Promise((resolve,reject)=>{
+  db.get()
+          .collection(collection.CART_COLLECTION)
+          .updateOne(
+            { _id: objectId(data.cart) },
+            {
+              $pull: { products: { item: objectId(data.product) } },
+            }
+          )
+          .then((response) => {
+            resolve({ removeProduct: true });
+          });
 
-  // removeProduct: ({ proId, cartId }) => {
-  //   return new Promise(async (resolve, reject) => {
-  //     let userCart = await db
-  //       .get()
-  //       .collection(collection.CART_COLLECTION)
-  //       .updateOne(
-  //         { _id: objectId(cartId) },
-  //         {
-  //           $pull: { products: { item: objectId(proId) } },
-  //         }
-  //       );
-  //     console.log(userCart);
-  //     if (userCart) {
-  //     }
-  //   });
-  // },
+})
+
+  },
+ 
   getTotalAmount: (userId) => {
     return new Promise(async (resolve, reject) => {
       let total = await db

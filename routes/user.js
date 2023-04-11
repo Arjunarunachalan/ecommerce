@@ -84,12 +84,13 @@ userHelpers.changeProductQuantity (req.body)
   res.json(response)
 })
 })
-// router.post('/remove-product',(req,res)=>{
-//   userHelpers.removeProduct(req.body).then((response)=>{
-//   resolve(response)
+router.post('/remove-product',(req,res)=>{
+  console.log(req.body);
+  userHelpers.removeProduct(req.body).then((response)=>{
+  res.json(response)
     
-//   })
-// })
+  })
+})
 
 router.get("/place-order",verifyLogin,async (req,res)=>{
   let total =await userHelpers.getTotalAmount(req.session.user._id)
