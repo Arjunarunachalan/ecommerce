@@ -75,7 +75,26 @@
        }
       })
     }
+function removeProduct(cartId,proId,userId){
+  
+$.ajax({
+  url:'/remove-product',
+   data:{
+        user:userId,
+        cart:cartId,
+        product:proId,
+        
+      },
+      method:'post',
+      success:(response)=>{
+        if(response.removeProduct){
+          alert('product removed')
+          location.reload()
+        }
+      }
 
+})
+}
     
 
 
