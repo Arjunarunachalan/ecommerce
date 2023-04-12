@@ -1,5 +1,5 @@
 {
-    "version": 3,
+    "version": 4,
     "name": "Ecommerce",
     "builds": [
        { "src": "app.js", "use": "@vercel/node" }
