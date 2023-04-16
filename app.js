@@ -11,7 +11,7 @@ var db = require("./Config/Connection")
 var session = require('express-session')
 
 var app = express();
-var fileUpload   =require('express-fileUpload')
+var fileUpload=require('express-fileupload')
 
 
 // view engine setup
