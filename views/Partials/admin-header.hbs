@@ -24,8 +24,27 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">All Users</a>
               </li>
-             
-            
+         
+            <div class="dropdown" style="margin-left:770px">
+  <button  class="btn btn-success dropdown-toggle mr-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+  {{#if admin}}
+  Admin
+  {{else}}
+Accounts
+  {{/if}}
+  
+   
+  </button>
+  <ul class="dropdown-menu">
+    <li>
+       {{#if admin}}
+        <a class="dropdown-item" href="/admin/adminlogout">Logout</a>
+
+  {{/if}}
+      </li>
+  
+</div>
+
               
           </div>
         </div>

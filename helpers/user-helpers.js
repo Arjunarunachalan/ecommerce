@@ -186,7 +186,7 @@ module.exports = {
       }
     });
   },
-  removeProduct:(data)=>{
+    removeProduct:(data)=>{
 return new Promise((resolve,reject)=>{
   db.get()
           .collection(collection.CART_COLLECTION)
