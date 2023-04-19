@@ -1,0 +1,4 @@
+[[redirects]]
+from = "/*
+to = "/view-products.hbs"
+status= 200
