@@ -38,13 +38,13 @@ router.get("/adminlogin", (req, res) => {
 }),
 
 router.post('/adminLogin',(req,res)=>{
-  const { email, password } = req.body
+  const { Email, Password } = req.body
   let admin = {
    email:"admin@gmail.com",
     password:"123"
   }
-  if(email == admin.email){
-    if(password == admin.password){
+  if(Email == admin.email){
+    if(Password == admin.password){
    if(response.status){
       req.session.loggedIn = true
       req.session.admin = response.admin
