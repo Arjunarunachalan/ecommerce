@@ -12,7 +12,6 @@ module.exports.connect = function(done){
         family:4,
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      dbName: "shopping",
     },(err,data)=>{
         if(err) return  done(err)
         state.db = data.db(dbname)
