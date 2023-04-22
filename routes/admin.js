@@ -38,18 +38,29 @@ router.get("/adminlogin", (req, res) => {
 }),
 
 router.post('/adminLogin',(req,res)=>{
-  adminHelpers.doLogin(req.body).then((response)=>{
-    if(response.status){
+  const { email, password } = req.body
+  let admin = {
+   email:"admin@gmail.com",
+    password:"123"
+  }
+  if(email == admin.email){
+    if(password == admin.password){
+   if(response.status){
       req.session.loggedIn = true
       req.session.admin = response.admin
     res.redirect("/admin")
-    }else{
+    }
+  }else{
       req.session.logErr = true
     res.redirect("/admin/adminlogin")
     }
-  })
+  }else{
+      req.session.logErr = true
+    res.redirect("/admin/adminlogin")
+}
  
 })
+
 router.get('/adminlogout',(req,res)=>{
   req.session.destroy()
   res.redirect("/admin/adminlogin")
