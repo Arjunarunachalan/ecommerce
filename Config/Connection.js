@@ -6,10 +6,14 @@ const state ={
 
 module.exports.connect = function(done){
 
-    const url = 'mongodb://localhost:27017' 
-    const dbname = 'shopping'
+    const url = '"mongodb+srv://testDB:testDB@testdb.a2vdg.mongodb.net/?retryWrites=true&w=majority"; 
 
-    MongoClient.connect(url,{family:4},(err,data)=>{
+    MongoClient.connect(url,{
+        family:4,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      dbName: "shopping",
+    },(err,data)=>{
         if(err) return  done(err)
         state.db = data.db(dbname)
         done()
