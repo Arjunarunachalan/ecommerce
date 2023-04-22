@@ -46,7 +46,7 @@ router.post('/adminLogin',(req,res)=>{
   if(Email == admin.email){
     if(Password == admin.password){
       req.session.loggedIn = true
-      req.session.admin = response.admin
+      req.session.admin = admin
     res.redirect("/admin")
 
   }else{
