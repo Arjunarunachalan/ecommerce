@@ -7,7 +7,7 @@ const state ={
 module.exports.connect = function(done){
 
     const url = "mongodb+srv://testDB:testDB@testdb.a2vdg.mongodb.net/?retryWrites=true&w=majority"; 
-
+dbName: "shopping",
     MongoClient.connect(url,{
         family:4,
       useNewUrlParser: true,
